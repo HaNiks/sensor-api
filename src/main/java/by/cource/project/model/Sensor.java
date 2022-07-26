@@ -1,11 +1,6 @@
 package by.cource.project.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -13,7 +8,6 @@ public class Sensor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @JsonProperty("name")
     private String name;
 
     public Sensor() {

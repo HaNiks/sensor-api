@@ -1,19 +1,22 @@
 package by.cource.project.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Objects;
+import javax.persistence.*;
 
+@Entity
 public class Measurement {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @JsonProperty("value")
     private double value;
-    @JsonProperty("raining")
     private boolean raining;
-    @JsonProperty("sensor")
+    @ManyToOne
+    @JoinColumn(name = "sensor", referencedColumnName = "name")
     private Sensor sensor;
 
+    @Autowired
     public Measurement(int id, double value, boolean raining, Sensor sensor) {
         this.id = id;
         this.value = value;
@@ -61,20 +64,7 @@ public class Measurement {
         return "Measurement{" +
                 "value=" + value +
                 ", raining=" + raining +
-                ", sensor=" + sensor +
+                ", sensor=" + sensor.getName() +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Measurement)) return false;
-        Measurement that = (Measurement) o;
-        return Double.compare(that.getValue(), getValue()) == 0 && isRaining() == that.isRaining() && getSensor().equals(that.getSensor());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getValue(), isRaining(), getSensor());
     }
 }

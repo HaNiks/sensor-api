@@ -1,7 +1,6 @@
 package by.cource.project.controller;
 
 import by.cource.project.model.Measurement;
-import by.cource.project.model.Sensor;
 import by.cource.project.service.MeasurementService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +17,8 @@ public class MeasurementController {
     }
 
     @PostMapping("/add")
-    public Measurement addMeasurement(@RequestBody Measurement measurement, Sensor sensor) {
-        return measurementService.addMeasurement(measurement, sensor);
+    public Measurement addMeasurement(@RequestBody Measurement measurement) {
+        return measurementService.addMeasurement(measurement);
     }
 
     @GetMapping
